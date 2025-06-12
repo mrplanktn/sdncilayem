@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SD NEGERI CILAYEM - Sekolah Dasar di Indonesia</title>
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+      min-height: 100vh;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    header {
+      width: 100%;
+      background-color: #1e3a8a;
+      color: white;
+      border-radius: 12px;
+      padding: 24px 16px;
+      box-shadow: 0 4px 8px rgba(30, 58, 138, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid white;
+      flex-shrink: 0;
+    }
+    .school-name {
+      font-size: 2rem;
+      font-weight: 700;
+      white-space: nowrap;
+      user-select: none;
+      color: white;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+    /* Navigation */
+    nav.main-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      user-select: none;
+    }
+    nav.main-nav a {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: white;
+      transition: color 0.3s ease;
+    }
+    nav.main-nav a:hover,
+    nav.main-nav a:focus {
+      color: #93c5fd;
+      outline: none;
+      text-decoration: underline;
+    }
+    /* Kebab Menu Button for nav on small screens */
+    .nav-kebab-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      color: white;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    .nav-kebab-button:hover,
+    .nav-kebab-button:focus {
+      background-color: rgba(255 255 255 / 0.2);
+      outline: none;
+    }
+    .nav-kebab-button svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+    /* Responsive menu (mobile) */
+    @media (max-width: 768px) {
+      nav.main-nav {
+        position: absolute;
+        top: 75px;
+        right: 16px;
+        background: #1e3a8a;
+        border-radius: 12px;
+        box-shadow: 0 12px 24px rgba(30, 58, 138, 0.6);
+        flex-direction: column;
+        padding: 12px 24px;
+        gap: 16px;
+        display: none;
+        user-select: none;
+        z-index: 300;
+      }
+      nav.main-nav.show {
+        display: flex;
+      }
+      .nav-kebab-button {
+        display: flex;
+      }
+      header .header-inner {
+        justify-content: space-between;
+      }
+      .school-name {
+        flex-grow: 1;
+        margin-left: 8px;
+        white-space: normal;
+        font-size: 1.6rem;
+      }
+    }
+    main {
+      width: 100%;
+      flex: 1;
+    }
+    /* Hero Section */
+    .hero {
+      margin: 32px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.1);
+    }
+    .hero-text {
+      flex: 1 1 320px;
+      min-width: 300px;
+    }
+    .hero-text h1 {
+      font-size: 2.8rem;
+      color: #1e3a8a;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: #374151;
+    }
+    .hero-image {
+      flex: 1 1 320px;
+      min-width: 300px;
+      text-align: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.15);
+      height: auto;
+    }
+    /* Sections */
+    section {
+      margin-bottom: 60px;
+    }
+    h2.section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 24px;
+      border-bottom: 4px solid #2563eb;
+      padding-bottom: 8px;
+      max-width: 240px;
+    }
+    /* School Data */
+    .school-data {
+      background: white;
+      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      color: #374151;
+      line-height: 1.5;
+    }
+    .school-data p {
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+    }
+    /* Teachers */
+    .teachers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 32px;
+    }
+    .teacher-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.08);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .teacher-card:focus-within,
+    .teacher-card:hover {
+      box-shadow: 0 12px 24px rgba(31, 41, 55, 0.15);
+      outline: none;
+    }
+    .teacher-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+      border: 3px solid #2563eb;
+    }
+    .teacher-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1e3a8a;
+      margin-bottom: 4px;
+    }
+    .teacher-subject {
+      font-size: 1rem;
+      color: #4b5563;
+    }
+    /* Students Info */
+    .students-info {
+      background: white;
+      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      color: #374151;
+    }
+    .students-info p {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    /* Footer */
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.9rem;
+      color: #6b7280;
+      user-select: none;
+      border-top: 1px solid #e5e7eb;
+      margin-top: auto;
+    }
+    /* Responsive */
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 16px 8px;
+      }
+      .school-name {
+        font-size: 1.8rem;
+      }
+      .hero {
+        flex-direction: column;
+      }
+      .hero-text, .hero-image {
+        min-width: auto;
+        flex: unset;
+      }
+      .students-info p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <div class="header-inner">
+      <div style="display:flex; align-items:center; gap: 12px; flex-shrink: 0;">
+    <img 
+      src="images/logo.png"
+      alt="Logo Sekolah Dasar Negeri Cilayem, berwarna biru dan putih dengan tulisan SD di tengah" 
+      class="logo"
+      onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/91aa1c6a-bf92-4c7c-b478-3012018ebf64.png';"
+    />
+    <div class="school-name">SD NEGERI CILAYEM</div>
+      </div>
+      <nav class="main-nav" role="navigation" aria-label="Menu utama">
+        <a href="#hero-title">Beranda</a>
+        <a href="#school-info-title">Data Sekolah</a>
+        <a href="#teachers-title">Data Guru</a>
+        <a href="#students-title">Data Siswa</a>
+      </nav>
+      <button class="nav-kebab-button" aria-label="Tampilkan menu" aria-controls="main-nav" aria-expanded="false" aria-haspopup="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="5" r="2"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+          <circle cx="12" cy="19" r="2"></circle>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <h2 id="hero-title">Selamat Datang di SD NEGERI CILAYEM</h2>
+        <p>Alamat: Kp. Cilayem RT. 05 RW. 11 Desa Ciptagumati,
+           Kec. Cikalongwetan, Kab. Bandung Barat 40556</p>
+        <p>SDN Cilayem adalah sekolah dasar yang berkomitmen memberikan pendidikan berkualitas untuk generasi muda bangsa.</p>
+      </div>
+      <div class="hero-image">
+        <img 
+          src="images/banner.webp" 
+          alt="Gambar Gedung Sekolah Dasar Nusantara modern dengan taman hijau di halaman depan dan atap berwarna merah" 
+          onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bf53a957-9b6e-472c-a339-bcfa5a8c0349.png';"
+        />
+      </div>
+    </section>
+
+    <section aria-labelledby="school-info-title" class="school-data">
+      <h2 id="school-info-title" class="section-title">Data Sekolah</h2>
+      <p><strong>Nama Sekolah:</strong> SD NEGERI CILAYEM</p>
+      <p><strong>Alamat:</strong> Kp. Cilayem RT. 05 RW. 11 Desa Ciptagumati,
+           Kec. Cikalongwetan, Kab. Bandung Barat 40556</p>
+      <p><strong>Status Sekolah:</strong> Negeri</p>
+      <p><strong>Akreditasi:</strong> B</p>
+      <p><strong>Jumlah Ruang Kelas:</strong> 6</p>
+      <p><strong>Kepala Sekolah:</strong> Didi Mulyadi</p>
+    </section>
+
+    <section aria-labelledby="teachers-title">
+      <h2 id="teachers-title" class="section-title">Data Guru</h2>
+      <p><strong>Jumlah Guru:</strong> 8</p>
+      <div class="teachers">
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-1">
+          <img 
+            src="images/chaerul.png" 
+            alt="Foto guru Pak Adi, guru matematika dengan senyum ramah dan pakaian rapi" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1b16eb15-7b39-49ae-8547-617c026e7be0.png';"
+          />
+          <h3 class="teacher-name">Pak Chaerul Saleh </h3>
+          <p id="desc-guru-1" class="teacher-subject">Guru Kelas</p>
+        </article>
+
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-2">
+          <img 
+            src="images/wulan.png"
+            alt="Foto guru Bu Rina, guru bahasa Indonesia mengenakan kacamata dan tersenyum" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://placehold.co/120x120?text=Guru';"
+          />
+          <h3 class="teacher-name">Bu Wulan</h3>
+          <p id="desc-guru-2" class="teacher-subject">Guru Kelas</p>
+        </article>
+
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-3">
+          <img 
+            src="images/Nurhasanah.png" 
+            alt="Foto guru Pak Joko, guru IPA dengan pakaian formal dan wajah ceria" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://placehold.co/120x120?text=Guru';"
+          />
+          <h3 class="teacher-name">Bu Nurhasanah</h3>
+          <p id="desc-guru-3" class="teacher-subject">Guru Kelas</p>
+        </article>
+
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-3">
+          <img 
+            src="images/wiwin.png" 
+            alt="Foto guru Pak Joko, guru IPA dengan pakaian formal dan wajah ceria" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://placehold.co/120x120?text=Guru';"
+          />
+          <h3 class="teacher-name">Bu Wiwin</h3>
+          <p id="desc-guru-3" class="teacher-subject">Guru kelas</p>
+        </article> 
+
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-3">
+          <img 
+            src="images/Nurhasanah.png" 
+            alt="Foto guru Pak Joko, guru IPA dengan pakaian formal dan wajah ceria" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://placehold.co/120x120?text=Guru';"
+          />
+          <h3 class="teacher-name">Bu Nurhasanah</h3>
+          <p id="desc-guru-3" class="teacher-subject">Guru IPA</p>
+        </article>
+
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-3">
+          <img 
+            src="images/Nurhasanah.png" 
+            alt="Foto guru Pak Joko, guru IPA dengan pakaian formal dan wajah ceria" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://placehold.co/120x120?text=Guru';"
+          />
+          <h3 class="teacher-name">Bu Nurhasanah</h3>
+          <p id="desc-guru-3" class="teacher-subject">Guru IPA</p>
+        </article>
+
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-3">
+          <img 
+            src="images/Nurhasanah.png" 
+            alt="Foto guru Pak Joko, guru IPA dengan pakaian formal dan wajah ceria" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://placehold.co/120x120?text=Guru';"
+          />
+          <h3 class="teacher-name">Bu Nurhasanah</h3>
+          <p id="desc-guru-3" class="teacher-subject">Guru IPA</p>
+        </article>
+
+        <article tabindex="0" class="teacher-card" aria-describedby="desc-guru-3">
+          <img 
+            src="images/Nurhasanah.png" 
+            alt="Foto guru Pak Joko, guru IPA dengan pakaian formal dan wajah ceria" 
+            class="teacher-photo"
+            onerror="this.onerror=null;this.src='https://placehold.co/120x120?text=Guru';"
+          />
+          <h3 class="teacher-name">Bu Nurhasanah</h3>
+          <p id="desc-guru-3" class="teacher-subject">Guru IPA</p>
+        </article>
+
+
+
+        <!-- More teacher cards can be added here similarly -->
+      </div>
+    </section>
+
+    <section aria-labelledby="students-title" class="students-info">
+      <h2 id="students-title" class="section-title">Data Siswa</h2>
+      <p><strong>Jumlah Siswa:</strong> 100</p>
+      <p>Siswa aktif yang belajar dengan penuh semangat dalam lingkungan yang mendukung pengembangan karakter dan intelektual.</p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>SD Negeri Cilayem &copy; 2024 - Kp. Cilayem RT. 05 RW. 11 Desa Ciptagumati,
+           Kec. Cikalongwetan, Kab. Bandung Barat 40556</p>
+    <p>Email: info@sdncilayem.sch.id | Telp: (021) 123-4567</p>
+  </footer>
+</body>
+</html>
+
